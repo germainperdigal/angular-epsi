@@ -6,6 +6,7 @@ import {ProfileUpdateInterface} from '../interfaces/profileUpdate.interface';
 import {tap} from 'rxjs/operators';
 import {User} from '../entities/user';
 import {AuthService} from './auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import {AuthService} from './auth.service';
 export class ProfileService {
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private snackBar: MatSnackBar
   ) { }
 
   updateProfile(profileChanges: ProfileUpdateInterface): Observable<any> {
@@ -23,6 +25,7 @@ export class ProfileService {
     ).pipe(
       tap((user: User) => {
         AuthService.user = user;
+        this.snackBar.open('Profil mis à jour !');
       })
     );
   }

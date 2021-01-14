@@ -1,0 +1,21 @@
+<header>
+  <div class="container">
+    <h1>Bienvenue !</h1>
+    <h3>Rencontre des apprenants qui ont les mêmes gouts que toi..</h3>
+    <div class="row">
+      <ng-container *ngIf="!isSignedIn">
+        <button routerLink="/auth/signup" mat-raised-button>Je m'inscris</button>
+        <button routerLink="/auth/signin" mat-raised-button>Je me connecte</button>
+      </ng-container>
+      <ng-container *ngIf="isSignedIn">
+        <button routerLink="/dash/home" mat-raised-button>Afficher les matchs</button>
+        <button routerLink="/dash/profile" mat-raised-button>Éditer mon profil</button>
+      </ng-container>
+    </div>
+  </div>
+</header>
+<section>
+
+</section>
+
+
