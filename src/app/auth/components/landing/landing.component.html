@@ -1,7 +1,7 @@
 <header>
   <div class="container">
     <h1>Bienvenue !</h1>
-    <h3>Rencontre des apprenants qui ont les mêmes gouts que toi..</h3>
+    <h3>Rencontre des apprenants qui ont les mêmes gouts que toi (et c'est gratuit)..</h3>
     <div class="row">
       <ng-container *ngIf="!isSignedIn">
         <button routerLink="/auth/signup" mat-raised-button>Je m'inscris</button>
@@ -15,7 +15,17 @@
   </div>
 </header>
 <section>
-
+  <hr>
+  <mat-grid-list cols="3" rowHeight="20vh">
+    <mat-grid-tile *ngFor="let avantage of avantages">
+      <div class="avantage" fxLayout="column" fxLayoutAlign="space-around center">
+        <i class="{{avantage.icon}} fa-2x"></i>
+        <h3>{{ avantage.title }}</h3>
+        <p>{{ avantage.content }}</p>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <hr>
 </section>
 
 
