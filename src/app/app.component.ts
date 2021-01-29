@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from './core/services/auth.service';
 import {SessionService} from './core/services/session.service';
 import {Router} from '@angular/router';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,10 @@ export class AppComponent {
 
   constructor(
     private sessionService: SessionService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private matSnackBar: MatSnackBar
+  ) {
+  }
 
   get isSignedIn(): boolean {
     return AuthService.isSignedIn;
@@ -22,7 +25,18 @@ export class AppComponent {
   signout(): void {
     AuthService.user = null;
     this.sessionService.clear();
-    this.router.navigate(['/auth/signin']);
+    this.matSnackBar.open('À bientôt !', null, {
+      duration: 5000,
+    });
+    this.router.navigate(['/']);
+  }
+
+  get isAdmin(): boolean {
+    if (this.isSignedIn) {
+      return AuthService.isAdmin;
+    } else {
+      return false;
+    }
   }
 
 }

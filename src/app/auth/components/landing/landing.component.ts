@@ -35,4 +35,8 @@ export class LandingComponent implements OnInit {
     return AuthService.isSignedIn;
   }
 
+  get isAdmin(): boolean {
+    return AuthService.isAdmin;
+  }
+
 }

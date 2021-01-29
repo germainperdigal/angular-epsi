@@ -10,6 +10,7 @@
       <ng-container *ngIf="isSignedIn">
         <button routerLink="/dash/home" mat-raised-button>Afficher les matchs</button>
         <button routerLink="/dash/profile" mat-raised-button>Éditer mon profil</button>
+        <button routerLink="/admin" *ngIf="isAdmin" mat-raised-button>Accéder à l'administration</button>
       </ng-container>
     </div>
   </div>

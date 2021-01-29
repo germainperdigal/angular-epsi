@@ -25,7 +25,9 @@ export class ProfileService {
     ).pipe(
       tap((user: User) => {
         AuthService.user = user;
-        this.snackBar.open('Profil mis à jour !');
+        this.snackBar.open('Profil mis à jour !', null,{
+          duration: 5000,
+        });
       })
     );
   }

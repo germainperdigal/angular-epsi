@@ -17,5 +17,4 @@ export class TagService {
       `${environment.api}/api/tag/find`
     );
   }
-
 }

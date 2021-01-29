@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {CanActivateGuard} from './core/can-activate.guard';
+import {E404Component} from "./errors/e404/e404.component";
 
 const routes: Routes = [
   {
@@ -8,14 +9,23 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
   },
   {
-    path: 'dash',
+    path: 'admin',
     canActivate: [CanActivateGuard],
     data: { admin: true },
+    loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule),
+  },
+  {
+    path: 'dash',
+    canActivate: [CanActivateGuard],
     loadChildren: () => import('./dash/dash.module').then(mod => mod.DashModule),
   },
   {
+    path: '',
+    loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
+  },
+  {
     path: '**',
-    redirectTo: '/auth/signin'
+    component: E404Component
   }
 ];
 

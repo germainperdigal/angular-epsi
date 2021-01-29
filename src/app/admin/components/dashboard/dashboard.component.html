@@ -1,0 +1,32 @@
+<div class="filters">
+<mat-form-field>
+    <mat-label>Filtrer les tags</mat-label>
+    <input matInput (input)="filterTags($event.target.value)" placeholder="Libellé du tag">
+  </mat-form-field>
+   <button mat-flat-button (click)="openCreationDialog()" color="primary">Créer un tag <mat-icon aria-hidden="false" aria-label="Example home icon">create</mat-icon></button>
+</div>
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Libellé</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="iteration">
+      <th mat-header-cell *matHeaderCellDef>Popularité</th>
+      <td mat-cell *matCellDef="let element">{{element.iteration}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon (click)="deleteTag(element)" aria-hidden="false" aria-label="Supprimer l'élément">delete</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+  <mat-paginator [pageSize]="15"></mat-paginator>

@@ -23,6 +23,10 @@ export class AuthService {
     return AuthService.user !== null;
   }
 
+  static get isAdmin(): boolean {
+    return AuthService.user.roles.includes('ROLE_ADMIN');
+  }
+
   signin(email: string, password: string): Observable<any> {
     return this.httpClient.post(
       `${environment.api}/api/login_check`,
@@ -47,7 +51,6 @@ export class AuthService {
       `${environment.api}/api/ping`
     ).pipe(
       tap((user: User) => {
-        console.log({user});
         AuthService.user = user;
       }),
     );

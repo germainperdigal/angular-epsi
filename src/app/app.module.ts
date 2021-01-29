@@ -8,16 +8,20 @@ import {CoreModule} from './core/core.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ApiInterceptor} from './core/api.interceptor';
 import {SharedModule} from './shared/shared.module';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { E404Component } from './errors/e404/e404.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    E404Component,
   ],
   imports: [
     CoreModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
     SharedModule,
   ],
   providers: [

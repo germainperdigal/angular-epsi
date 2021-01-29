@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {AuthService} from './services/auth.service';
 import {catchError, map} from 'rxjs/operators';
 import {User} from './entities/user';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class CanActivateGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private matSnackBar: MatSnackBar,
   ) {
   }
 
@@ -36,12 +38,18 @@ export class CanActivateGuard implements CanActivate {
         if ('status' in response) {
           if (401 === response.status || 403 === response.status) {
             this.router.navigate(['/auth/signin']);
+            this.matSnackBar.open('Merci de vous connecter !',  null,{
+              duration: 5000,
+            });
             return false;
           }
           return true;
         } else {
           if ( !response.roles.includes('ROLE_ADMIN') && ('admin' in next.data) ) {
-            this.router.navigate(['/auth/signin']);
+            this.matSnackBar.open('Vous n\'êtes pas autorisé à accéder à cette section...', null,{
+              duration: 5000,
+            });
+            this.router.navigate(['/dash/home']);
             return false;
           }
           return true;
